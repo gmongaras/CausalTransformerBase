@@ -1,0 +1,10 @@
+{
+    "files.associations": {
+        "*.tcc": "cpp",
+        "chrono": "cpp",
+        "array": "cpp",
+        "cmath": "cpp",
+        "new": "cpp",
+        "type_traits": "cpp"
+    }
+}

@@ -1,0 +1,27 @@
+{
+    "version": "0.0.0",
+    "configurations": [
+        {
+            "name": "Python: Current File",
+            "type": "python",
+            "request": "launch",
+
+            "program": "/home/gmongaras/miniconda3/bin/torchrun",
+            "args": [
+                "--nproc_per_node=2",
+                "--master-port", "29510",
+                "train.py",
+            ],
+            "env": {
+                    "CUDA_LAUNCH_BLOCKING": "1",
+                    "CUDA_VISIBLE_DEVICES": "0,1",
+                },
+
+            // "module": "infer.py"
+
+
+            "console": "integratedTerminal",
+            "justMyCode": false
+        }
+    ]
+}
