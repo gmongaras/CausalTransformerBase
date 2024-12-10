@@ -32,22 +32,25 @@ def init_distributed():
     world_size = int(os.environ['WORLD_SIZE'])
     local_rank = int(os.environ['LOCAL_RANK'])
     
+    torch.cuda.set_device(local_rank)
+    
     # Try the nccl backend
     try:
         dist.init_process_group(
                 backend="nccl",
                 init_method=dist_url,
                 world_size=world_size,
-                rank=rank)
+                rank=rank,
+                device_id=torch.device(f"cuda:{local_rank}"))
     # Use the gloo backend if nccl isn't supported
     except RuntimeError:
         dist.init_process_group(
                 backend="gloo",
                 init_method=dist_url,
                 world_size=world_size,
-                rank=rank)
+                rank=rank,
+                device_id=torch.device(f"cuda:{local_rank}"))
 
-    # this will make all .cuda() calls work properly
     torch.cuda.set_device(local_rank)
 
     # synchronizes all the threads to reach this point before moving on
